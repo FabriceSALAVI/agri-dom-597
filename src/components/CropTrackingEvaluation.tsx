@@ -10,6 +10,8 @@ interface CropEvaluation {
   id: string;
   culture: string;
   parcelle: string;
+  typeParcelle: string; // Traitement ou Contrôle
+  typeEvaluation: string; // Pré ou Post
   dateEvaluation: string;
   stadeGrowth: string;
   sante: string;
@@ -26,47 +28,104 @@ const initialData: CropEvaluation[] = [
   {
     id: '1',
     culture: 'Canne à Sucre',
-    parcelle: 'Parcelle Nord',
-    dateEvaluation: '2024-01-15',
+    parcelle: 'Parcelle Nord A',
+    typeParcelle: 'Traitement',
+    typeEvaluation: 'Pré',
+    dateEvaluation: '2024-01-10',
     stadeGrowth: 'Tallage',
     sante: 'Bonne',
-    rendementEstime: 85,
-    problemes: 'Léger stress hydrique',
-    actionsRecommandees: 'Irrigation supplémentaire',
+    rendementEstime: 75,
+    problemes: 'Aucun',
+    actionsRecommandees: 'Application traitement prévu',
     priorite: 'Moyenne',
     statut: 'En cours',
     prochaineSuivi: '2024-02-01',
-    notes: 'Croissance normale pour la saison'
+    notes: 'État initial avant traitement'
   },
   {
     id: '2',
-    culture: 'Banane',
-    parcelle: 'Parcelle Sud',
-    dateEvaluation: '2024-01-10',
-    stadeGrowth: 'Floraison',
+    culture: 'Canne à Sucre',
+    parcelle: 'Parcelle Nord A',
+    typeParcelle: 'Traitement',
+    typeEvaluation: 'Post',
+    dateEvaluation: '2024-01-25',
+    stadeGrowth: 'Tallage',
     sante: 'Excellente',
-    rendementEstime: 92,
+    rendementEstime: 90,
     problemes: 'Aucun',
     actionsRecommandees: 'Surveillance continue',
     priorite: 'Basse',
     statut: 'Optimal',
-    prochaineSuivi: '2024-01-25',
-    notes: 'Développement exceptionnel'
+    prochaineSuivi: '2024-02-10',
+    notes: 'Amélioration nette après traitement'
   },
   {
     id: '3',
-    culture: 'Ananas',
-    parcelle: 'Parcelle Est',
+    culture: 'Canne à Sucre',
+    parcelle: 'Parcelle Nord B',
+    typeParcelle: 'Contrôle',
+    typeEvaluation: 'Pré',
+    dateEvaluation: '2024-01-10',
+    stadeGrowth: 'Tallage',
+    sante: 'Bonne',
+    rendementEstime: 75,
+    problemes: 'Aucun',
+    actionsRecommandees: 'Surveillance sans intervention',
+    priorite: 'Moyenne',
+    statut: 'En cours',
+    prochaineSuivi: '2024-02-01',
+    notes: 'Parcelle témoin - état initial'
+  },
+  {
+    id: '4',
+    culture: 'Canne à Sucre',
+    parcelle: 'Parcelle Nord B',
+    typeParcelle: 'Contrôle',
+    typeEvaluation: 'Post',
+    dateEvaluation: '2024-01-25',
+    stadeGrowth: 'Tallage',
+    sante: 'Bonne',
+    rendementEstime: 78,
+    problemes: 'Léger stress hydrique',
+    actionsRecommandees: 'Surveillance continue',
+    priorite: 'Moyenne',
+    statut: 'En cours',
+    prochaineSuivi: '2024-02-10',
+    notes: 'Évolution naturelle sans traitement'
+  },
+  {
+    id: '5',
+    culture: 'Banane',
+    parcelle: 'Parcelle Sud A',
+    typeParcelle: 'Traitement',
+    typeEvaluation: 'Pré',
     dateEvaluation: '2024-01-08',
-    stadeGrowth: 'Maturation',
-    sante: 'Préoccupante',
-    rendementEstime: 65,
-    problemes: 'Attaque de cochenilles',
-    actionsRecommandees: 'Traitement insecticide urgent',
+    stadeGrowth: 'Floraison',
+    sante: 'Moyenne',
+    rendementEstime: 70,
+    problemes: 'Début attaque cochenilles',
+    actionsRecommandees: 'Traitement insecticide prévu',
     priorite: 'Haute',
     statut: 'Action requise',
     prochaineSuivi: '2024-01-20',
-    notes: 'Nécessite intervention immédiate'
+    notes: 'Nécessite intervention rapide'
+  },
+  {
+    id: '6',
+    culture: 'Banane',
+    parcelle: 'Parcelle Sud B',
+    typeParcelle: 'Contrôle',
+    typeEvaluation: 'Pré',
+    dateEvaluation: '2024-01-08',
+    stadeGrowth: 'Floraison',
+    sante: 'Moyenne',
+    rendementEstime: 68,
+    problemes: 'Début attaque cochenilles',
+    actionsRecommandees: 'Surveillance seule',
+    priorite: 'Haute',
+    statut: 'Observation',
+    prochaineSuivi: '2024-01-20',
+    notes: 'Parcelle témoin - pas de traitement'
   }
 ];
 
@@ -87,6 +146,24 @@ const columns: Column[] = [
     type: 'text',
     isEditable: true,
     width: '120px'
+  },
+  {
+    id: 'typeParcelle',
+    header: 'Type Parcelle',
+    accessorKey: 'typeParcelle',
+    type: 'select',
+    options: ['Traitement', 'Contrôle'],
+    isEditable: true,
+    width: '120px'
+  },
+  {
+    id: 'typeEvaluation',
+    header: 'Type Évaluation',
+    accessorKey: 'typeEvaluation',
+    type: 'select',
+    options: ['Pré', 'Post'],
+    isEditable: true,
+    width: '130px'
   },
   {
     id: 'dateEvaluation',
@@ -152,7 +229,7 @@ const columns: Column[] = [
     header: 'Statut',
     accessorKey: 'statut',
     type: 'select',
-    options: ['En cours', 'Optimal', 'Action requise', 'Terminé'],
+    options: ['En cours', 'Optimal', 'Action requise', 'Observation', 'Terminé'],
     isEditable: true,
     width: '120px'
   },
@@ -196,6 +273,8 @@ export const CropTrackingEvaluation = () => {
       id: Date.now().toString(),
       culture: newRow.culture || '',
       parcelle: newRow.parcelle || '',
+      typeParcelle: newRow.typeParcelle || 'Traitement',
+      typeEvaluation: newRow.typeEvaluation || 'Pré',
       dateEvaluation: new Date().toISOString().split('T')[0],
       stadeGrowth: newRow.stadeGrowth || 'Croissance',
       sante: newRow.sante || 'Bonne',
@@ -213,11 +292,16 @@ export const CropTrackingEvaluation = () => {
 
   const getStatistics = () => {
     const total = data.length;
+    const traitement = data.filter(item => item.typeParcelle === 'Traitement').length;
+    const controle = data.filter(item => item.typeParcelle === 'Contrôle').length;
+    const preEvaluations = data.filter(item => item.typeEvaluation === 'Pré').length;
+    const postEvaluations = data.filter(item => item.typeEvaluation === 'Post').length;
     const optimal = data.filter(item => item.statut === 'Optimal').length;
     const actionRequired = data.filter(item => item.statut === 'Action requise').length;
-    const avgRendement = data.reduce((sum, item) => sum + item.rendementEstime, 0) / total;
+    const avgRendementTraitement = data.filter(item => item.typeParcelle === 'Traitement').reduce((sum, item) => sum + item.rendementEstime, 0) / traitement || 0;
+    const avgRendementControle = data.filter(item => item.typeParcelle === 'Contrôle').reduce((sum, item) => sum + item.rendementEstime, 0) / controle || 0;
     
-    return { total, optimal, actionRequired, avgRendement };
+    return { total, traitement, controle, preEvaluations, postEvaluations, optimal, actionRequired, avgRendementTraitement, avgRendementControle };
   };
 
   const stats = getStatistics();
@@ -236,7 +320,7 @@ export const CropTrackingEvaluation = () => {
   return (
     <div className="space-y-6">
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
@@ -244,6 +328,30 @@ export const CropTrackingEvaluation = () => {
               <div>
                 <p className="text-sm text-muted-foreground">Total évaluations</p>
                 <p className="text-2xl font-bold">{stats.total}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center space-x-2">
+              <TrendingUp className="h-5 w-5 text-blue-500" />
+              <div>
+                <p className="text-sm text-muted-foreground">Parcelles traitement</p>
+                <p className="text-2xl font-bold text-blue-600">{stats.traitement}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center space-x-2">
+              <Eye className="h-5 w-5 text-purple-500" />
+              <div>
+                <p className="text-sm text-muted-foreground">Parcelles contrôle</p>
+                <p className="text-2xl font-bold text-purple-600">{stats.controle}</p>
               </div>
             </div>
           </CardContent>
@@ -260,14 +368,20 @@ export const CropTrackingEvaluation = () => {
             </div>
           </CardContent>
         </Card>
+      </div>
 
+      {/* Comparison Statistics */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <AlertTriangle className="h-5 w-5 text-orange-500" />
+            <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Action requise</p>
-                <p className="text-2xl font-bold text-orange-600">{stats.actionRequired}</p>
+                <p className="text-sm text-muted-foreground">Évaluations Pré</p>
+                <p className="text-xl font-bold">{stats.preEvaluations}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Évaluations Post</p>
+                <p className="text-xl font-bold">{stats.postEvaluations}</p>
               </div>
             </div>
           </CardContent>
@@ -275,12 +389,18 @@ export const CropTrackingEvaluation = () => {
 
         <Card>
           <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <TrendingUp className="h-5 w-5 text-blue-500" />
-              <div>
-                <p className="text-sm text-muted-foreground">Rendement moyen</p>
-                <p className="text-2xl font-bold text-blue-600">{stats.avgRendement.toFixed(1)}%</p>
-              </div>
+            <div className="text-center">
+              <p className="text-sm text-muted-foreground">Rendement moyen - Traitement</p>
+              <p className="text-2xl font-bold text-blue-600">{stats.avgRendementTraitement.toFixed(1)}%</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4">
+            <div className="text-center">
+              <p className="text-sm text-muted-foreground">Rendement moyen - Contrôle</p>
+              <p className="text-2xl font-bold text-purple-600">{stats.avgRendementControle.toFixed(1)}%</p>
             </div>
           </CardContent>
         </Card>
@@ -291,8 +411,11 @@ export const CropTrackingEvaluation = () => {
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
             <Calendar className="h-6 w-6" />
-            <span>Suivi et Évaluation des Cultures</span>
+            <span>Suivi et Évaluation des Cultures - Pré/Post Traitement</span>
           </CardTitle>
+          <p className="text-sm text-muted-foreground">
+            Comparaison entre parcelles traitements et parcelles contrôles avec évaluations avant et après intervention
+          </p>
         </CardHeader>
         <CardContent>
           <EditableTable
@@ -313,11 +436,15 @@ export const CropTrackingEvaluation = () => {
           <div className="flex flex-wrap gap-2">
             <Button variant="outline" size="sm">
               <Calendar className="h-4 w-4 mr-2" />
-              Planifier évaluations
+              Planifier évaluations Post
             </Button>
             <Button variant="outline" size="sm">
               <TrendingUp className="h-4 w-4 mr-2" />
-              Analyser tendances
+              Comparer Pré/Post
+            </Button>
+            <Button variant="outline" size="sm">
+              <Eye className="h-4 w-4 mr-2" />
+              Analyser Traitement vs Contrôle
             </Button>
             <Button variant="outline" size="sm">
               <AlertTriangle className="h-4 w-4 mr-2" />
