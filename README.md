@@ -8,7 +8,7 @@ The application addresses common challenges faced by modern agriculture, such as
 
 # Key Features:
 
-* Tableau de bord (Dashboard): A comprehensive, real-time overview of the entire farm. The dashboard provides a quick look at the status of all parcels, crop health, ongoing tasks, and key financial metrics. It uses visual charts and graphs to present complex data in an easy-to-understand format.
+**Tableau de bord (Dashboard)**: A comprehensive, real-time overview of the entire farm. The dashboard provides a quick look at the status of all parcels, crop health, ongoing tasks, and key financial metrics. It uses visual charts and graphs to present complex data in an easy-to-understand format.
 
 **Parcelles (Parcels)**: This module allows users to digitally map and manage their individual land parcels. Farmers can define the boundaries of each parcel, assign specific crops, and record details like soil type, size, and location. This feature provides a geospatial view of the farm, making it easier to plan and track activities on a per-field basis.
 
