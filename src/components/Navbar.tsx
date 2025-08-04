@@ -56,6 +56,7 @@ const Navbar = () => {
     { title: 'Tableau de bord', path: '/', icon: Home },
     { title: 'Parcelles', path: '/parcelles', icon: MapPin },
     { title: 'Cultures', path: '/cultures', icon: Sprout },
+    { title: 'Suivi & Évaluation', path: '/suivi-evaluation', icon: BarChart2 },
     { title: 'Inventaire', path: '/inventaire', icon: Package },
     { title: 'Finances', path: '/finances', icon: Wallet },
     { title: 'Statistiques', path: '/statistiques', icon: BarChart2 },

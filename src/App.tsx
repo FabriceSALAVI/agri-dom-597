@@ -6,6 +6,7 @@ import Index from "./pages/Index";
 import ParcelsPage from "./pages/ParcelsPage";
 import ParcelsDetailsPage from "./pages/ParcelsDetailsPage";
 import CropsPage from "./pages/CropsPage";
+import CropTrackingPage from "./pages/CropTrackingPage";
 import InventoryPage from "./pages/InventoryPage";
 import FinancePage from "./pages/FinancePage";
 import StatsPage from "./pages/StatsPage";
@@ -22,6 +23,7 @@ const routes = [
   { path: "/parcelles", element: <ParcelsPage /> },
   { path: "/parcelles/:id", element: <ParcelsDetailsPage /> },
   { path: "/cultures", element: <CropsPage /> },
+  { path: "/suivi-evaluation", element: <CropTrackingPage /> },
   { path: "/inventaire", element: <InventoryPage /> },
   { path: "/finances", element: <FinancePage /> },
   { path: "/statistiques", element: <StatisticsProvider><StatsPage /></StatisticsProvider> },
