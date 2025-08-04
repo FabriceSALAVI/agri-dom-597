@@ -1,8 +1,5 @@
-## Agri Dom
 
 ## Project info
-
-**URL**: https://lovable.dev/projects/721b7097-37cd-4dc4-8946-0910b3ea8bc7
 
 # Project Description: Agri Dom
 Agri Dom is a modern and intuitive web-based dashboard designed to help farmers and agricultural businesses manage their operations efficiently and make data-driven decisions. Built with a responsive and user-friendly interface, Agri Dom acts as a central hub for all farm-related activities, from field management to financial tracking.
