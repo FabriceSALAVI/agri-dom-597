@@ -16,7 +16,8 @@ import {
   ChevronRight,
   Settings,
   Users,
-  FileText
+  FileText,
+  FolderOpen
 } from 'lucide-react';
 
 const Navbar = () => {
@@ -56,14 +57,15 @@ const Navbar = () => {
 
   const navItems = [
     { title: 'Tableau de bord', path: '/', icon: Home },
+    { title: 'Suivi & Évaluation', path: '/suivi-evaluation', icon: BarChart2 },
+    { title: 'Projets', path: '/projets', icon: FolderOpen },
+    { title: 'Collecte Données', path: '/collecte-donnees', icon: FileText },
+    { title: 'Secteurs', path: '/secteurs', icon: Settings },
     { title: 'Parcelles', path: '/parcelles', icon: MapPin },
     { title: 'Cultures', path: '/cultures', icon: Sprout },
-    { title: 'Suivi & Évaluation', path: '/suivi-evaluation', icon: BarChart2 },
     { title: 'Inventaire', path: '/inventaire', icon: Package },
     { title: 'Finances', path: '/finances', icon: Wallet },
-    { title: 'Statistiques', path: '/statistiques', icon: BarChart2 },
-    { title: 'Rapports', path: '/rapports', icon: FileText },
-    { title: 'Paramètres', path: '/parametres', icon: Settings },
+    { title: 'Statistiques', path: '/statistiques', icon: BarChart2 }
   ];
 
   const isActive = (path: string) => {
@@ -94,7 +96,7 @@ const Navbar = () => {
         <div className="p-4 border-b border-border flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
             <Sprout className="h-6 w-6 text-agri-primary" />
-            <span className="text-lg font-bold text-foreground">S&E Platform</span>
+            <span className="text-lg font-bold text-foreground">Follow</span>
           </Link>
           <button 
             onClick={toggleTheme} 

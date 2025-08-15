@@ -18,12 +18,15 @@ import { CRMProvider } from "./contexts/CRMContext";
 import { StatisticsProvider } from "./contexts/StatisticsContext";
 import { AppSettingsProvider } from "./contexts/AppSettingsContext";
 import { SectorProvider } from "./contexts/SectorContext";
+import { ProjectProvider } from "./contexts/ProjectContext";
 import { trackPageView } from "./utils/analytics";
 
 // Define routes configuration with redirects
 const routes = [
   { path: "/", element: <Index /> },
   { path: "/suivi-evaluation", element: <MonitoringEvaluationPage /> },
+  { path: "/projets", element: <MonitoringEvaluationPage /> }, // Temporary redirect to S&E
+  { path: "/collecte-donnees", element: <MonitoringEvaluationPage /> }, // Temporary redirect to S&E
   { path: "/secteurs", element: <SectorConfigPage /> },
   { path: "/parcelles", element: <ParcelsPage /> },
   { path: "/parcelles/:id", element: <ParcelsDetailsPage /> },
@@ -70,22 +73,24 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <AppSettingsProvider>
         <SectorProvider>
-          <CRMProvider>
-            <BrowserRouter>
-              <TooltipProvider>
-                <RouterChangeHandler />
-                <Routes>
-                  {routes.map((route) => (
-                    <Route 
-                      key={route.path} 
-                      path={route.path} 
-                      element={route.element} 
-                    />
-                  ))}
-                </Routes>
-              </TooltipProvider>
-            </BrowserRouter>
-          </CRMProvider>
+          <ProjectProvider>
+            <CRMProvider>
+              <BrowserRouter>
+                <TooltipProvider>
+                  <RouterChangeHandler />
+                  <Routes>
+                    {routes.map((route) => (
+                      <Route 
+                        key={route.path} 
+                        path={route.path} 
+                        element={route.element} 
+                      />
+                    ))}
+                  </Routes>
+                </TooltipProvider>
+              </BrowserRouter>
+            </CRMProvider>
+          </ProjectProvider>
         </SectorProvider>
       </AppSettingsProvider>
     </QueryClientProvider>

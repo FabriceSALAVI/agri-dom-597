@@ -248,7 +248,7 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
             <div>
             <h1 className="text-3xl font-bold text-gray-800">
-              Plateforme S&E - {currentSector.name}
+              Follow - Plateforme S&E
             </h1>
               <p className="text-gray-500">
                 Bienvenue, {userName} | Secteur: {currentSector.name} | Sync: {lastSync.toLocaleTimeString()}
