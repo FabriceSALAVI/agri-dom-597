@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useSector } from '../contexts/SectorContext';
 import { 
   Home, 
   MapPin, 
@@ -22,6 +23,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const location = useLocation();
+  const { currentSector } = useSector();
   
   // Close mobile menu when route changes
   useEffect(() => {
@@ -92,7 +94,7 @@ const Navbar = () => {
         <div className="p-4 border-b border-border flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
             <Sprout className="h-6 w-6 text-agri-primary" />
-            <span className="text-lg font-bold text-foreground">Agri Dom</span>
+            <span className="text-lg font-bold text-foreground">S&E Platform</span>
           </Link>
           <button 
             onClick={toggleTheme} 

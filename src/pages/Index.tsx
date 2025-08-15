@@ -10,16 +10,17 @@ import { Button } from '@/components/ui/button';
 import { PlusCircle, Download, Filter, RefreshCw, Upload, Printer } from 'lucide-react';
 import { StatisticsProvider } from '../contexts/StatisticsContext';
 import { useCRM } from '../contexts/CRMContext';
+import { useSector } from '../contexts/SectorContext';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState<string>('dashboard');
-  const [userName, setUserName] = useState('Exploitant');
+  const [userName, setUserName] = useState('Gestionnaire');
   const [importDialogOpen, setImportDialogOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   
-  // Utiliser le contexte CRM
+  // Utiliser les contextes
   const { 
     lastSync,
     isRefreshing,
@@ -28,6 +29,8 @@ const Index = () => {
     importModuleData,
     printModuleData
   } = useCRM();
+  
+  const { currentSector } = useSector();
 
   // Actions based on the active tab
   const getTabActions = () => {
@@ -244,9 +247,11 @@ const Index = () => {
         <div className="p-6 animate-enter">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-800">Tableau de Bord Agri Dom</h1>
+            <h1 className="text-3xl font-bold text-gray-800">
+              Plateforme S&E - {currentSector.name}
+            </h1>
               <p className="text-gray-500">
-                Bienvenue, {userName} | Dernière synchronisation: {lastSync.toLocaleTimeString()}
+                Bienvenue, {userName} | Secteur: {currentSector.name} | Sync: {lastSync.toLocaleTimeString()}
               </p>
             </div>
             {getTabActions()}
